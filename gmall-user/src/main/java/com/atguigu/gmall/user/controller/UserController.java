@@ -2,6 +2,7 @@ package com.atguigu.gmall.user.controller;
 
 
 import com.atguigu.gmall.user.bean.UmsMember;
+import com.atguigu.gmall.user.bean.UmsMemberReceiveAddress;
 import com.atguigu.gmall.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,20 @@ public class UserController {
     public String index(){
         return "hello user";
     }
+
+
+    // 根据用户将id查询收货地址
+    @RequestMapping("getReceiveAddress")
+    @ResponseBody
+    public List<UmsMemberReceiveAddress> getReceiveAddress(String umsMemberId){
+
+        List<UmsMemberReceiveAddress> umsMemberReceiveAddresses = userService.getReceiveAddress(umsMemberId);
+
+        return umsMemberReceiveAddresses;
+    }
+
+
+
 
 
 
