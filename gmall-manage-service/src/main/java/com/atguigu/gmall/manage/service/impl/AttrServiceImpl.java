@@ -21,9 +21,9 @@ public class AttrServiceImpl implements AttrService {
     PmsBaseAttrInfoMapper pmsBaseAttrInfoMapper;
     @Autowired
     PmsBaseAttrValueMapper pmsBaseAttrValueMapper;
-
     @Autowired
     PmsBaseSaleAttrMapper pmsBaseSaleAttrMapper;
+
 
 
     @Override
@@ -33,7 +33,13 @@ public class AttrServiceImpl implements AttrService {
         e.createCriteria().andEqualTo("catalog3Id",catalog3Id);
         List<PmsBaseAttrInfo> pmsBaseAttrInfos = pmsBaseAttrInfoMapper.selectByExample(e);
         for (PmsBaseAttrInfo pmsBaseAttrInfo : pmsBaseAttrInfos) {
+//            Example es=new Example(PmsBaseAttrValue.class);
+//            e.createCriteria().andEqualTo("attrId",pmsBaseAttrInfo.getId());
 
+            PmsBaseAttrValue pmsBaseAttrValue=new PmsBaseAttrValue();
+            pmsBaseAttrValue.setAttrId(pmsBaseAttrInfo.getId());
+            List<PmsBaseAttrValue> pmsBaseAttrValues=pmsBaseAttrValueMapper.select(pmsBaseAttrValue);
+            pmsBaseAttrInfo.setAttrValueList(pmsBaseAttrValues);
         }
 
         return pmsBaseAttrInfos;
